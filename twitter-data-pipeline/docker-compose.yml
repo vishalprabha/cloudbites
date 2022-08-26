@@ -1,0 +1,33 @@
+version: '3.3'
+services:
+  redis:
+    image: redis
+    networks:
+      - kafka_network
+    ports:
+      - 6379:6379
+  
+
+    
+  kafka-consumer:
+    container_name: kafka-consumer
+    restart: always
+    image: "soma5722/kafka-consumer:latest"
+    networks:
+      - kafka_network
+    depends_on:
+      - redis
+
+  kafka-producer:
+    container_name: kafka-producer
+    restart: always
+    image: "soma5722/kafka-producer:latest"
+    networks:
+      - kafka_network
+    depends_on:
+     - kafka-consumer  
+
+networks:
+  kafka_network:
+    name: kafka_docker_example_net
+ 

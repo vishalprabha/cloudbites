@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.service.type: LoadBalancer
+    kompose.version: 1.26.0 (40646f47)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: zookeeper-tcp
+  name: zookeeper-tcp
+spec:
+  ports:
+    - name: "22181"
+      port: 22181
+      targetPort: 2181
+  selector:
+    io.kompose.service: zookeeper
+  type: LoadBalancer
+status:
+  loadBalancer: {}
